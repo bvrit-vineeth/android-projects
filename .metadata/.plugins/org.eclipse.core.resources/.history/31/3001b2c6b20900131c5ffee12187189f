@@ -1,0 +1,14 @@
+package com.example.todolistapp;
+
+import android.database.sqlite.SQLiteDatabase;
+
+public class DbOperations {
+	private SQLiteDatabase database;
+	private MySQLiteHelper dbhelper;
+	private String[] table_columns = new String[]{MySQLiteHelper.COLUMN_ID, 
+			MySQLiteHelper.COLUMN_TITLE, MySQLiteHelper.COLUMN_DESCRIPTION, MySQLiteHelper.COLUMN_TIME};
+	
+	public DbOperations(Context context){
+		dbhelper = MySQLiteHelper(context);
+	}
+}

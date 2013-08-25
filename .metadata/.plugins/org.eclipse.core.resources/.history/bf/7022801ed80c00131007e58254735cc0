@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	android:id="@+id/widget32"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical"
+	xmlns:android="http://schemas.android.com/apk/res/android">
+<TextView
+	android:id="@+id/title"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:text="ToDo Item Title :"
+	android:typeface="serif"
+	android:textStyle="italic"
+	android:textColor="#ffff3333" />
+<TextView
+	android:id="@+id/title_text"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content" />
+<TextView
+	android:id="@+id/description"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:text="ToDo Item Description :"
+	android:typeface="serif"
+	android:textStyle="italic"
+	android:textColor="#ffff3333" />
+<TextView
+	android:id="@+id/description_text"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content" />
+<CheckBox
+	android:id="@+id/widget42"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:text="@string/checkbox_field_data"
+	android:layout_gravity="center_horizontal"
+	android:onClick="checkBoxClick" />
+</LinearLayout>

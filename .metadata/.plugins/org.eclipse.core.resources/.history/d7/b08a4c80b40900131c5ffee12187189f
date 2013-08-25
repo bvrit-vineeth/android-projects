@@ -1,0 +1,40 @@
+package com.example.todolistapp;
+
+import com.example.sqlitetest.MySQLiteHelper;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+
+public class DbOperations {
+	private SQLiteDatabase database;
+	private MySQLiteHelper dbhelper;
+	private String[] table_columns = new String[]{MySQLiteHelper.COLUMN_ID, 
+			MySQLiteHelper.COLUMN_TITLE, MySQLiteHelper.COLUMN_DESCRIPTION, MySQLiteHelper.COLUMN_TIME};
+	
+	public DbOperations(Context context){
+		dbhelper = new MySQLiteHelper(context);
+	}
+	
+	public void openDatabase() throws SQLException{
+		database = dbhelper.getWritableDatabase();
+	}
+	
+	public void closeDatabase(){
+		dbhelper.close();
+	}
+	
+	public DbObject createToDoItem(String title, String description){
+		ContentValues values = new ContentValues();
+		values.put(MySQLiteHelper.COLUMN_TITLE, title);
+		values.put(MySQLiteHelper.COLUMN_DESCRIPTION, description);
+		long insertId = database.insert(MySQLiteHelper.TABLE_NAME, null, values);
+		Cursor cursor = database.query(MySQLiteHelper.TABLE_NAME, table_columns,  MySQLiteHelper.COLUMN_ID + " = " + insertId , null, null, null, null);
+		cursor.moveToFirst();
+		DbObject newData;
+		cursor.close();
+		return newData;
+	}
+}

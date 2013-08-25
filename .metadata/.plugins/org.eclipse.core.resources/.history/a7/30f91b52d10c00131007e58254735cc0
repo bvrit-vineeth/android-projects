@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	android:id="@+id/widget49"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	xmlns:android="http://schemas.android.com/apk/res/android">
+<TextView
+	android:id="@+id/list_row_time"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:text="Time"
+	android:layout_below="@+id/widget50"
+	android:layout_alignParentRight="true" />
+<TextView
+	android:id="@+id/list_row_title"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:text="Title"
+	android:layout_below="@+id/widget51"
+	android:layout_alignParentLeft="true" />
+<TextView
+	android:id="@+id/list_row_date"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:text="Date"
+	android:layout_alignParentTop="true"
+	android:layout_alignParentRight="true" />
+</RelativeLayout>

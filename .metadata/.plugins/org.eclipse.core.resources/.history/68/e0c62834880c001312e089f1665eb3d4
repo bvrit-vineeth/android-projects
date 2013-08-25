@@ -1,0 +1,15 @@
+package com.example.todolistapp;
+
+import android.content.Context;
+import android.widget.ArrayAdapter;
+
+public class CustomArrayAdapter extends ArrayAdapter<String[]>{
+	private final Context context;
+	private final String[][] values;
+	
+	public CustomArrayAdapter(Context context, String[][] values){
+		super(context, R.layout.activity_main, values);
+		this.context = context;
+		this.values = values;
+	}
+}

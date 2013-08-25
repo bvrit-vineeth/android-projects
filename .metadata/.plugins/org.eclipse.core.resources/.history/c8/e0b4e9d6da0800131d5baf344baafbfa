@@ -1,0 +1,31 @@
+package com.example.sqlitetest;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+
+public class CommentsDataSource {
+	private SQLiteDatabase database;
+	private MySQLiteHelper dbHelper;
+	private String[] allColumns = { MySQLiteHelper.COLUMN_ID,
+	      MySQLiteHelper.COLUMN_COMMENT };
+	
+	public CommentsDataSource(Context context) {
+	    dbHelper = new MySQLiteHelper(context);
+	}
+	
+	public void open() throws SQLException {
+	    database = dbHelper.getWritableDatabase();
+	}
+
+	public void close() {
+	    dbHelper.close();
+	}
+	
+	public Comment createComment(String comment){
+		ContentValues values = new ContentValues();
+		values.put(MySQLiteHelper.COLUMN_COMMENT, comment);
+		long insertID = database.insert(MySQLiteHelper.TABLE_COMMENTS, null, values)
+	}
+}

@@ -1,0 +1,30 @@
+package com.example.todolistapp;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+
+public class DbOperations {
+	private SQLiteDatabase database;
+	private MySQLiteHelper dbhelper;
+	private String[] table_columns = new String[]{MySQLiteHelper.COLUMN_ID, 
+			MySQLiteHelper.COLUMN_TITLE, MySQLiteHelper.COLUMN_DESCRIPTION, MySQLiteHelper.COLUMN_TIME};
+	
+	public DbOperations(Context context){
+		dbhelper = new MySQLiteHelper(context);
+	}
+	
+	public void openDatabase() throws SQLException{
+		database = dbhelper.getWritableDatabase();
+	}
+	
+	public void closeDatabase(){
+		dbhelper.close();
+	}
+	
+	public DbObject createToDoItem(String title, String description){
+		ContentValues values = new ContentValues();
+		values.put(MySQLiteHelper.COLUMN_TITLE, title);
+	}
+}

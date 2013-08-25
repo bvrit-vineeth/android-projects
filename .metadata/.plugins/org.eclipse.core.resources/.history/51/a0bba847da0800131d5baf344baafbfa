@@ -1,0 +1,10 @@
+package com.example.sqlitetest;
+
+import android.database.sqlite.SQLiteDatabase;
+
+public class CommentsDataSource {
+	private SQLiteDatabase database;
+	private MySQLiteHelper dbHelper;
+	private String[] allColumns = { MySQLiteHelper.COLUMN_ID,
+	      MySQLiteHelper.COLUMN_COMMENT };
+}

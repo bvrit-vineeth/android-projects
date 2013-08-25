@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+	android:id="@+id/widget58"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout
+	android:id="@+id/widget65"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+<EditText
+	android:id="@+id/title"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:hint="@string/title_form"
+	android:textSize="18sp" />
+
+<EditText
+    android:id="@+id/description"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:hint="@string/description_form"
+    android:inputType="textMultiLine"
+    android:lines="5"
+    android:textSize="18sp" />
+
+<TextView
+	android:id="@+id/widget74"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:text="@string/date_form"
+	android:textColor="#ff3399ff" />
+<DatePicker
+	android:id="@+id/date"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content" />
+<TextView
+	android:id="@+id/widget76"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:text="@string/time_form"
+	android:textColor="#ff3399ff" />
+<TimePicker
+	android:id="@+id/time"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content" />
+<Button
+	android:id="@+id/widget78"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:text="@string/add_item"
+	android:onClick="AddNewToDoItem" />
+</LinearLayout>
+</ScrollView>

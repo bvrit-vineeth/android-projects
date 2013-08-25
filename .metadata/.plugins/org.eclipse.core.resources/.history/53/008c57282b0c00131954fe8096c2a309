@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+	android:id="@+id/widget58"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout
+	android:id="@+id/widget65"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical">
+<EditText
+	android:id="@+id/widget66"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:hint="Enter Title"
+	android:textSize="18sp" />
+<EditText
+	android:id="@+id/widget67"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:text="EditText"
+	android:textSize="18sp" />
+<TextView
+	android:id="@+id/widget74"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:text="Select Date :" />
+<DatePicker
+	android:id="@+id/widget75"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content" />
+<TextView
+	android:id="@+id/widget76"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:text="Select Time :" />
+<TimePicker
+	android:id="@+id/widget77"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content" />
+<Button
+	android:id="@+id/widget78"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:text="Add" />
+</LinearLayout>
+</ScrollView>

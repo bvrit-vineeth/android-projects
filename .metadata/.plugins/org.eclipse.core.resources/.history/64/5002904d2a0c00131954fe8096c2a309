@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+	android:id="@+id/widget58"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout
+	android:id="@+id/widget65"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical">
+<EditText
+	android:id="@+id/widget66"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:text="EditText"
+	android:textSize="18sp" />
+<EditText
+	android:id="@+id/widget67"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:text="EditText"
+	android:textSize="18sp" />
+<DatePicker
+	android:id="@+id/widget71"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content" />
+<TimePicker
+	android:id="@+id/widget72"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content" />
+<Button
+	android:id="@+id/widget73"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:text="Button" />
+</LinearLayout>
+</ScrollView>

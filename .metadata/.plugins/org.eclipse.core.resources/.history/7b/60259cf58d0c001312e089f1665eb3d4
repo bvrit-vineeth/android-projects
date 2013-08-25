@@ -1,0 +1,66 @@
+package com.example.todolistapp;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import android.app.ListActivity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.View;
+import android.widget.SimpleAdapter;
+
+public class MainActivity extends ListActivity {
+	private DbOperations dbOperations = new DbOperations(this);
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		
+	    dbOperations.openDatabase();
+		List<DbObject> allItems = dbOperations.getAllToDoItems();
+		List<String> Titles = new ArrayList<String>();
+		for(int i=0; i < allItems.size(); i++){
+			Titles.add(allItems.get(i).getTitle());
+		}
+		ArrayList<Map<String, String>> list = buildData();
+	    String[] from = { "name", "purpose" };
+	    int[] to = { android.R.id.text1, android.R.id.text2 };
+
+	    SimpleAdapter adapter = new SimpleAdapter(this, list,
+	        android.R.layout.simple_list_item_2, from, to);
+	    setListAdapter(adapter);
+	  }
+
+	  private ArrayList<Map<String, String>> buildData() {
+	    ArrayList<Map<String, String>> list = new ArrayList<Map<String, String>>();
+	    list.add(putData("Android", "Mobile"));
+	    list.add(putData("Windows7", "Windows7"));
+	    list.add(putData("iPhone", "iPhone"));
+	    return list;
+	  }
+
+	  private HashMap<String, String> putData(String name, String purpose) {
+	    HashMap<String, String> item = new HashMap<String, String>();
+	    item.put("name", name);
+	    item.put("purpose", purpose);
+	    return item;
+	  }
+	
+	
+	public void onClick(View view){
+		Intent newIntent = new Intent(this, NewTodoActivity.class);
+		startActivity(newIntent);
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+}

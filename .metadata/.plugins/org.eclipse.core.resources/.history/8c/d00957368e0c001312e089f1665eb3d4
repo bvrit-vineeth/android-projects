@@ -1,0 +1,46 @@
+package com.example.todolistapp;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import android.app.ListActivity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.View;
+import android.widget.SimpleAdapter;
+
+public class MainActivity extends ListActivity {
+	private DbOperations dbOperations = new DbOperations(this);
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		
+	    dbOperations.openDatabase();
+		List<DbObject> allItems = dbOperations.getAllToDoItems();
+		List<String[]> Titles = new ArrayList<String[]>();
+		for(int i=0; i < allItems.size(); i++){
+			String[] new_data = new String(){allItems.get(i).getTitle()};
+			Titles.add([allItems.get(i).getTitle()]);
+		}
+		
+	  }
+	
+	
+	public void onClick(View view){
+		Intent newIntent = new Intent(this, NewTodoActivity.class);
+		startActivity(newIntent);
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+}

@@ -1,0 +1,126 @@
+package com.gatheringinfo;
+
+import java.net.SocketException;
+
+import org.ksoap2.SoapEnvelope;
+import org.ksoap2.serialization.SoapObject;
+import org.ksoap2.serialization.SoapSerializationEnvelope;
+import org.ksoap2.transport.HttpTransportSE;
+
+import com.util.MyListener;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class GatheringInformationActivity extends Activity implements MyListener
+{
+	private  final String USER_NAME = "myname";
+	String usernamestr="";
+	SharedPreferences.Editor prefsEditor;
+	SharedPreferences myPrefs;
+	EditText username,password;
+	@Override
+	public void onCreate(Bundle savedInstanceState) 
+	{  
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main);
+		username=(EditText)findViewById(R.id.useridET);
+		password=(EditText)findViewById(R.id.passwordET);
+		
+		myPrefs=this.getSharedPreferences("myPrefs",MODE_WORLD_READABLE);
+		prefsEditor = myPrefs.edit();
+//		usernamestr=username.getText().toString();
+//		prefsEditor.putString(USER_NAME, usernamestr);
+//		Toast.makeText(getApplicationContext(), usernamestr, Toast.LENGTH_SHORT).show();
+//        prefsEditor.commit();
+		
+		Button b1=(Button)findViewById(R.id.btnLogin);
+		b1.setOnClickListener(new OnClickListener() 
+		{
+			public void onClick(View v) 
+			{
+				if(username.getText().toString().equals("") && password.getText().toString().equals(""))
+				{
+					Toast.makeText(v.getContext(), "Please enter username and password",60).show();
+				}
+				else if(username.getText().toString().equals(""))
+				{
+					Toast.makeText(v.getContext(), "Please enter username",60).show();					
+				}
+				else if(password.getText().toString().equals(""))
+				{
+					Toast.makeText(v.getContext(), "Please enter password",60).show();
+				}
+				else
+				{
+				SoapObject request=new SoapObject(NAMESPACE, LOGIN_METHOD);
+				usernamestr=username.getText().toString();
+				request.addProperty("username", usernamestr);
+				request.addProperty("password", password.getText().toString());
+				prefsEditor.putString(USER_NAME, usernamestr);
+				prefsEditor.commit();
+				//Toast.makeText(getApplicationContext(), usernamestr, Toast.LENGTH_SHORT).show();
+				SoapSerializationEnvelope envelope=new SoapSerializationEnvelope(SoapEnvelope.VER11);
+				envelope.setOutputSoapObject(request);
+				HttpTransportSE androidHttpTransport = new HttpTransportSE(URL);
+				try
+				{
+					androidHttpTransport.call(SOAP_ACTION, envelope);
+					SoapObject resultsRequestSOAP = (SoapObject) envelope.bodyIn;
+					String str=resultsRequestSOAP.toString();
+					String[] arr=str.split("=");
+					String[] arr1=arr[1].split(";");
+					if(arr1[0].equals("success"))
+					{
+						Toast.makeText(v.getContext(), "LoginSuccess", 60);
+						Intent i=new Intent(v.getContext(), SelectionMenu.class);
+						startActivity(i);
+						username.setText("");
+						password.setText("");
+					}
+					else
+					{
+						Toast.makeText(v.getContext(), "Invalid username or password",60).show();
+					}
+				}
+				catch (SocketException e) 
+				{
+					Toast.makeText(v.getContext(), "Check web service",60).show();
+				}
+				catch (Exception e) 
+				{					
+					e.printStackTrace();
+				}
+				
+			}
+			}
+		});
+		
+		TextView forgotpass=(TextView) findViewById(R.id.link_to_forgot);
+        
+        // Listening to forgot password new account link
+        forgotpass.setOnClickListener(new View.OnClickListener() 
+        {			
+			@Override
+			public void onClick(View v) 
+			{
+				// Switching to Forgot Password screen
+				Intent i=new Intent(getApplicationContext(), ForgotPassword.class);
+				startActivity(i);
+				
+			}
+		});
+    }
+	
+	public void fireNextIntent(View view){
+		Intent newIntent = new Intent(this, SelectionMenu.class);
+	}
+}

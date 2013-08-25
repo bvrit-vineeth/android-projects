@@ -1,0 +1,53 @@
+package com.example.todolistapp;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.View;
+import android.widget.TextView;
+
+public class TodoListDescriptionActivity extends Activity {
+	
+	String title, description;
+	long id;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_todo_list_description);
+		
+		Intent receivedIntent = getIntent();
+		TextView title = (TextView)findViewById(R.id.title);
+		TextView description = (TextView)findViewById(R.id.description);
+		setTitle(receivedIntent.getStringExtra("title"));
+		setDescription(receivedIntent.getStringExtra("description"));
+		setID(receivedIntent.getLongExtra("id", -1));
+		title.setText(this.title);
+		description.setText(this.description);
+		description.setText(receivedIntent.getStringExtra("description"));
+	}
+	
+	public void setTitle(String title){
+		this.title = title;
+	}
+	
+	public void setDescription(String description){
+		this.description = description;
+	}
+	
+	public void setID(long id){
+		this.id = id;
+	}
+	
+	public void checkBoxClick(View view){
+		
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.todo_list_description, menu);
+		return true;
+	}
+
+}
