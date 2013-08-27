@@ -38,7 +38,6 @@ public class MainActivity extends Activity{
 				showClickedItemData.putExtra("description", clickedItemDescription);
 				showClickedItemData.putExtra("id", Itemid);
 				startActivity(showClickedItemData);
-				finish();
 			}
 			
 		});
@@ -48,7 +47,6 @@ public class MainActivity extends Activity{
 	public void onClick(View view){
 		Intent newIntent = new Intent(this, NewTodoActivity.class);
 		startActivity(newIntent);
-		finish();
 	}
 	
 	@Override
@@ -56,6 +54,22 @@ public class MainActivity extends Activity{
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		dbOperations.closeDatabase();
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		dbOperations.openDatabase();
+		allItems = dbOperations.getAllToDoItems();
+		ListView todolistView = (ListView)findViewById(R.id.ToDoListView);
+		CustomArrayAdapter adapter = new CustomArrayAdapter(this, (ArrayList<DbObject>)allItems);
+		todolistView.setAdapter(adapter);
 	}
 
 }

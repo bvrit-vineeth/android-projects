@@ -1,0 +1,38 @@
+package com.vineeth.networkingtest;
+
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
+import android.widget.EditText;
+
+public class DownloadWebPage extends Activity {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_download_web_page);
+	}
+	
+	public void fetchWebPage(){
+		ConnectivityManager conn = (ConnectivityManager)getSystemService(CONNECTIVITY_SERVICE);
+		NetworkInfo info = conn.getActiveNetworkInfo();
+		EditText urlField = (EditText)findViewById(R.id.url_field);
+		String url = urlField.getText().toString();
+		if(info!=null && info.isConnected()){
+			new showWebPageData().execute(url); 
+		}
+		else{
+			//return "Network Access Not available";
+		}
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.download_web_page, menu);
+		return true;
+	}
+
+}

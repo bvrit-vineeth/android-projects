@@ -1,0 +1,39 @@
+package com.vineeth.networkingtest;
+
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
+import android.view.View;
+import android.widget.TextView;
+
+public class NetworkState extends Activity {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_network_state);
+	}
+	
+	public void checkNetworkStatus(View view){
+		ConnectivityManager conn = (ConnectivityManager)getSystemService(CONNECTIVITY_SERVICE);
+		NetworkInfo info = conn.getActiveNetworkInfo();
+		TextView text = (TextView)findViewById(R.id.status);
+		if(info!=null && info.isConnected()){
+			text.setText("Network Access Available");
+		}
+		else{
+			text.setText("Network Access Not available");
+		}
+	}
+
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.network_state, menu);
+		return true;
+	}
+
+}

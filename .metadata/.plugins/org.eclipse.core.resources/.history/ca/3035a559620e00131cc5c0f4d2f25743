@@ -1,0 +1,29 @@
+package com.vineeth.networkingtest;
+
+import java.io.IOException;
+
+import android.os.AsyncTask;
+import android.widget.TextView;
+
+public class showWebPageData extends AsyncTask<String, Void, String>{
+	
+	TextView showDownloadedData;
+	@Override
+	protected String doInBackground(String... params) {
+		try{
+			//call function to send HTTP request
+		}
+		catch(IOException e){
+			return "Error Retrieving Webpage";
+		}
+	} 
+	
+	@Override
+	protected void onPostExecute(String result) {
+		showDownloadedData.setText(result);
+	}
+	
+	public void setTextView(TextView text){
+		this.showDownloadedData = text;
+	}
+}

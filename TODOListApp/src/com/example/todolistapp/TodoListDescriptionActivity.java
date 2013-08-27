@@ -44,9 +44,10 @@ public class TodoListDescriptionActivity extends Activity {
 		db.deleteToDoItem(this.id);
 		db.closeDatabase();
 		Toast.makeText(TodoListDescriptionActivity.this, "ToDo Item Deleted", Toast.LENGTH_LONG).show();
-		Intent intent = new Intent(this,MainActivity.class);
-		startActivity(intent);
-		finish();
+		//Intent intent = new Intent(this,MainActivity.class);
+		//startActivity(intent);
+		//intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		this.finish();
 	}
 
 	@Override

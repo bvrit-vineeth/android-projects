@@ -11,13 +11,11 @@
 <fullyQualifiedTypeName name="android.database.SQLException"/>
 <fullyQualifiedTypeName name="android.content.ContentValues"/>
 <fullyQualifiedTypeName name="java.sql.Date"/>
-<fullyQualifiedTypeName name="android.widget.EditText"/>
 <fullyQualifiedTypeName name="android.widget.DatePicker"/>
 <fullyQualifiedTypeName name="android.widget.TimePicker"/>
 <fullyQualifiedTypeName name="com.example.todolistapp.MySQLiteHelper"/>
 <fullyQualifiedTypeName name="android.widget.Toast"/>
 <fullyQualifiedTypeName name="android.widget.ArrayAdapter"/>
-<fullyQualifiedTypeName name="android.widget.TextView"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="com.example.todolistapp.R.layout"/>
 <fullyQualifiedTypeName name="com.example.todolistapp.CustomArrayAdapter"/>
@@ -35,4 +33,18 @@
 <fullyQualifiedTypeName name="com.example.todolistapp.DbOperations"/>
 <fullyQualifiedTypeName name="com.example.todolistapp.TodoListDescriptionActivity"/>
 <fullyQualifiedTypeName name="com.example.todolistapp.NewTodoActivity"/>
+<fullyQualifiedTypeName name="android.net.ConnectivityManager"/>
+<fullyQualifiedTypeName name="android.net.NetworkInfo"/>
+<fullyQualifiedTypeName name="android.os.AsyncTask"/>
+<fullyQualifiedTypeName name="android.widget.TextView"/>
+<fullyQualifiedTypeName name="java.io.IOException"/>
+<fullyQualifiedTypeName name="java.net.URI"/>
+<fullyQualifiedTypeName name="java.net.HttpURLConnection"/>
+<fullyQualifiedTypeName name="java.io.InputStream"/>
+<fullyQualifiedTypeName name="java.io.InputStreamReader"/>
+<fullyQualifiedTypeName name="com.vineeth.networkingtest.NetworkState"/>
+<fullyQualifiedTypeName name="com.vineeth.networkingtest.DownloadWebPage"/>
+<fullyQualifiedTypeName name="com.vineeth.networkingtest.showWebPageData"/>
+<fullyQualifiedTypeName name="android.widget.EditText"/>
+<fullyQualifiedTypeName name="com.vineeth.networkingtest.R.id"/>
 </qualifiedTypeNameHistroy>

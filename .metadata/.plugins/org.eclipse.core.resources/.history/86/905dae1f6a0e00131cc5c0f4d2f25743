@@ -1,0 +1,64 @@
+package com.vineeth.networkingtest;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import android.os.AsyncTask;
+import android.widget.TextView;
+
+public class showWebPageData extends AsyncTask<String, Void, String>{
+	
+	TextView showDownloadedData;
+	@Override
+	protected String doInBackground(String... params) {
+		try{
+			//call function to send HTTP request
+		}
+		catch(IOException e){
+			return "Error Retrieving Webpage";
+		}
+	} 
+	
+	@Override
+	protected void onPostExecute(String result) {
+		showDownloadedData.setText(result);
+	}
+	
+	public void setTextView(TextView text){
+		this.showDownloadedData = text;
+	}
+	
+	private String downloadWebPage(String inputurl) throws IOException{
+		InputStream result = null;
+		try{
+			URL url = new URL(inputurl);
+			HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+			conn.setReadTimeout(10000);
+	        conn.setConnectTimeout(15000);
+	        conn.setRequestMethod("GET");
+	        conn.setDoInput(true);
+	        conn.connect();
+	        result = conn.getInputStream();
+		}
+		finally{
+			if(result != null){
+				result.close();
+			}
+		}
+	}
+	
+	public String convertInputStreamToString(InputStream input) throws IOException, UnsupportedEncodingException{
+		char[] buffer = new char[512];
+		String returnString = new String();
+		Reader reader = null;
+		reader = new InputStreamReader(input, "UTF-8");
+		while(reader.read(buffer)!=-1){
+			returnString += new String(buffer);
+		}
+	}
+}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	android:id="@+id/widget32"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical"
+	xmlns:android="http://schemas.android.com/apk/res/android">
+<TextView
+	android:id="@+id/widget35"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:text="Network Operations"
+	android:textSize="25sp"
+	android:typeface="sans"
+	android:textStyle="italic"
+	android:gravity="center" />
+<Button
+	android:id="@+id/widget37"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:text="Check Network Status" />
+<Button
+	android:id="@+id/widget38"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:text="Download Web Page" />
+<Button
+	android:id="@+id/widget39"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:text="REST Service" />
+</LinearLayout>

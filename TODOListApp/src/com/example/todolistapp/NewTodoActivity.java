@@ -1,7 +1,6 @@
 package com.example.todolistapp;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -57,9 +56,10 @@ public class NewTodoActivity extends Activity {
 		db.createToDoItem(title, description, date, time);
 		db.closeDatabase();
 		Toast.makeText(NewTodoActivity.this, "ToDo Item Created", Toast.LENGTH_LONG).show();
-		Intent intent = new Intent(this,MainActivity.class);
-		startActivity(intent);
-		finish();
+		//Intent intent = new Intent(this,MainActivity.class);
+		//startActivity(intent);
+		//intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		this.finish();
 	}
 	
 	@Override

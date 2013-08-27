@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	android:id="@+id/widget32"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical"
+	xmlns:android="http://schemas.android.com/apk/res/android">
+<TextView
+	android:id="@+id/widget35"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:text="Network Status"
+	android:textSize="20sp"
+	android:gravity="center" />
+<TextView
+	android:id="@+id/network_state"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:text="TextView" />
+</LinearLayout>
