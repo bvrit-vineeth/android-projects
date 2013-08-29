@@ -1,8 +1,11 @@
 package com.example.todolistapp;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +23,7 @@ public class CustomArrayAdapter extends ArrayAdapter<DbObject>{
 		this.values = values;
 	}
 	
+	@SuppressLint("SimpleDateFormat")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) context
@@ -28,7 +32,15 @@ public class CustomArrayAdapter extends ArrayAdapter<DbObject>{
 		TextView title = (TextView)listRowView.findViewById(R.id.list_row_title);
 		TextView date = (TextView)listRowView.findViewById(R.id.list_row_date);
 		TextView time = (TextView)listRowView.findViewById(R.id.list_row_time);
-		String [] splitTimeStamp = values.get(position).getTimeStamp().split(" ");
+		String timeStamp = values.get(position).getTimeStamp();
+		Date rep=null;
+		try {
+			rep = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z").parse(timeStamp);
+		} catch (java.text.ParseException e) {
+			e.printStackTrace();
+		}
+		String daterep = new SimpleDateFormat("MMM-dd-yyyy HH:mm:ss").format(rep);
+		String [] splitTimeStamp = daterep.split(" ");
 		title.setText(values.get(position).getTitle());
 		date.setText(splitTimeStamp[0]);
 		time.setText(splitTimeStamp[1]);

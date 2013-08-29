@@ -1,7 +1,20 @@
 package com.example.todolistapp;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -11,11 +24,18 @@ import android.widget.Toast;
 public class TodoListDescriptionActivity extends Activity {
 	String title, description;
 	long id;
+	private String fetch_url = "http://sampletodolist.herokuapp.com/deleteTodoListitem/";
+	private String KEY_SUCCESS = "Success";
+	private String KEY_ERROR = "Error";
+	private String toast_msg;
+	//private boolean status=false;
+	public String ID_IDENTIFIER = "id";
+	public String STATUS_IDENTIFIER = "status";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_todo_list_description);
-		
 		Intent receivedIntent = getIntent();
 		TextView title = (TextView)findViewById(R.id.title_text);
 		TextView description = (TextView)findViewById(R.id.description_text);
@@ -38,16 +58,11 @@ public class TodoListDescriptionActivity extends Activity {
 		this.id = id;
 	}
 	
-	public void checkBoxClick(View view){
-		DbOperations db = new DbOperations(getBaseContext());
-		db.openDatabase();
-		db.deleteToDoItem(this.id);
-		db.closeDatabase();
-		Toast.makeText(TodoListDescriptionActivity.this, "ToDo Item Deleted", Toast.LENGTH_LONG).show();
-		//Intent intent = new Intent(this,MainActivity.class);
-		//startActivity(intent);
-		//intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		this.finish();
+	public void checkBoxClick(View view) throws UnsupportedEncodingException{
+		String postData = "id=" + id;
+		DeleteItemRestCall delobj = new DeleteItemRestCall();
+		delobj.execute(fetch_url, postData);
+		finish();
 	}
 
 	@Override
@@ -55,6 +70,100 @@ public class TodoListDescriptionActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.todo_list_description, menu);
 		return true;
+	}
+	
+	private class DeleteItemRestCall extends AsyncTask<String, Void, JSONObject>{
+		@Override
+		protected JSONObject doInBackground(String... params) {
+			try{
+				//call function to send HTTP request
+				return downloadWebPage(params[0], params[1]);
+			}
+			catch(IOException e){
+				return null;
+			}
+		} 
+		
+		@Override
+		protected void onPostExecute(JSONObject result) {
+			if(result!=null){
+				parseJSON(result);
+				/*Intent resultIntent = new Intent();
+				resultIntent.putExtra(ID_IDENTIFIER, id);
+				resultIntent.putExtra(STATUS_IDENTIFIER, status);
+				setResult(RESULT_OK, resultIntent);*/
+				Toast.makeText(TodoListDescriptionActivity.this, toast_msg, Toast.LENGTH_LONG).show();
+			}
+			else{
+				Toast.makeText(TodoListDescriptionActivity.this, toast_msg, Toast.LENGTH_LONG).show();
+			}
+		}
+		
+		private JSONObject downloadWebPage(String inputurl, String urlEncodedData) throws IOException{
+			InputStream result = null;
+			try{
+				URL url = new URL(inputurl);
+				HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+				conn.setReadTimeout(30000);
+		        conn.setConnectTimeout(30000);
+		        conn.setRequestMethod("POST");
+		        conn.setDoInput(true);
+		        
+		        //Set post data
+		        conn.setDoOutput(true);
+		        DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
+		        wr.writeBytes(urlEncodedData);
+		        wr.flush();
+		        wr.close();
+		        
+		        conn.connect();
+		        result = conn.getInputStream();
+		        return convertInputStreamToJSON(result);
+			}
+			catch(Exception e){
+				toast_msg = "Network Error Occured";
+				return null;
+			}
+			finally{
+				if(result != null){
+					result.close();
+				}
+			}
+		}
+		
+		public JSONObject convertInputStreamToJSON(InputStream input) throws IOException, UnsupportedEncodingException{
+			BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+			StringBuilder sb = new StringBuilder();
+			String line = null;
+			JSONObject jsonFormat = null;
+			while ((line = reader.readLine()) != null) {
+                sb.append(line + "\n");
+            }
+			input.close();
+			String jsonString = sb.toString();
+			try {
+				jsonFormat = new JSONObject(jsonString);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			return jsonFormat;
+		}
+		
+		public void parseJSON(JSONObject input){
+			try {
+				String msg = input.getString(KEY_SUCCESS);
+				if(msg!=null){
+					toast_msg = msg;
+					//status = true;
+				}
+				else{
+					toast_msg = input.getString(KEY_ERROR);
+					//status = false;
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }
